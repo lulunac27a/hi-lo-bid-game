@@ -57,7 +57,7 @@ function playRound(randomNumber) {
             const isLower = userGuess === 'l' && nextNumber < randomNumber;
 
             if (isHigher || isLower) {
-                score++;
+                score += Math.round(bidAmount * (isHigher ? 100 / (101 - randomNumber) : 100 / randomNumber));
                 chips += bidAmount;
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`);
             } else {
