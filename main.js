@@ -32,7 +32,7 @@ function playRound(randomNumber) {
     console.log(`Current chips: ${chips}`);
 
     rl.question('Enter your bid amount: ', (bid) => {
-        const bidAmount = parseInt(bid);
+        const bidAmount = parseInt(bid, 10);
 
         // Validate bid
         if (isNaN(bidAmount) || bidAmount <= 0 || bidAmount > chips) {
