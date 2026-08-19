@@ -5,12 +5,13 @@ const rl = readline.createInterface({
 });
 
 let score = 0;
+let maxNumber = 100;
 let chips = 100;
 const totalAttempts = 5;
 let currentAttempt = 1;
 
 function getRandomNumber() {
-    return Math.floor(Math.random() * 100) + 1;
+    return Math.floor(Math.random() * maxNumber) + 1;
 }
 
 // Start the game with an initial number
@@ -57,7 +58,7 @@ function playRound(randomNumber) {
             const isLower = userGuess === 'l' && nextNumber < randomNumber;
 
             if (isHigher || isLower) {
-                score += Math.round(bidAmount * (isHigher ? 100 / (101 - randomNumber) : 100 / randomNumber));
+                score += Math.round(bidAmount * (isHigher ? maxNumber / (maxNumber + 1 - randomNumber) : maxNumber / randomNumber));
                 chips += bidAmount;
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`);
             } else {
