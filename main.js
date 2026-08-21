@@ -7,7 +7,9 @@ const rl = readline.createInterface({
 let score = 0;
 const inputMaxNumber = Number.parseInt(process.argv[2], 10);
 let maxNumber =
-    Number.isInteger(inputMaxNumber) && inputMaxNumber > 0 ? inputMaxNumber : 100;
+    Number.isInteger(inputMaxNumber) && inputMaxNumber > 0
+        ? inputMaxNumber
+        : 100;
 let chips = 100;
 const totalAttempts = 5;
 let currentAttempt = 1;
@@ -52,7 +54,9 @@ function playRound(randomNumber) {
 
             // Validate guess
             if (userGuess !== "h" && userGuess !== "l") {
-                console.log('Invalid choice. Enter "h" for higher or "l" for lower.');
+                console.log(
+                    'Invalid choice. Enter "h" for higher or "l" for lower.',
+                );
                 return playRound(randomNumber); // Retry this round
             }
 
