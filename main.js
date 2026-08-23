@@ -6,14 +6,57 @@ const rl = readline.createInterface({
 });
 
 let score = 0; //score variable to keep track of the player's score
-const inputMaxNumber = Number.parseInt(process.argv[2], 10); //parse the maximum number from command line arguments
-let maxNumber =
-    Number.isInteger(inputMaxNumber) && inputMaxNumber > 0
-        ? inputMaxNumber
-        : 100; //set maxNumber to the parsed value if it's a positive integer, otherwise default to 100
-let chips = 100; //initialize chips to 100
-const totalAttempts = 5; //set total attempts to 5
-let currentAttempt = 1; //initialize current attempt to 1
+let maxNumber,
+    chips,
+    totalAttempts,
+    currentAttempt = 1; //variables to store the maximum number, chips, total attempts, and current attempt
+
+function getPositiveInteger(value, defaultValue, settingName) {
+    const parsedValue = Number.parseInt(value, 10);
+
+    if (Number.isInteger(parsedValue) && parsedValue > 0) {
+        return parsedValue;
+    }
+
+    console.log(`Invalid ${settingName}. Using default of ${defaultValue}.`);
+    return defaultValue;
+}
+
+function initializeGame() {
+    rl.question(
+        "Enter the maximum number (default 100): ",
+        (inputMaxNumber) => {
+            maxNumber = getPositiveInteger(
+                inputMaxNumber,
+                100,
+                "maximum number",
+            );
+
+            rl.question(
+                "Enter the starting chips (default 100): ",
+                (inputChips) => {
+                    chips = getPositiveInteger(
+                        inputChips,
+                        100,
+                        "starting chips",
+                    );
+
+                    rl.question(
+                        "Enter the total attempts (default 10): ",
+                        (inputTotalAttempts) => {
+                            totalAttempts = getPositiveInteger(
+                                inputTotalAttempts,
+                                10,
+                                "total attempts",
+                            );
+                            startGame();
+                        },
+                    );
+                },
+            );
+        },
+    );
+}
 
 function getRandomNumber() {
     //function to generate a random number between 1 and maxNumber
@@ -80,9 +123,9 @@ function playRound(randomNumber) {
                 //if the user's guess is correct
                 score += Math.round(
                     bidAmount *
-                        (isHigher
-                            ? maxNumber / (maxNumber + 1 - randomNumber)
-                            : maxNumber / randomNumber),
+                    (isHigher
+                        ? maxNumber / (maxNumber + 1 - randomNumber)
+                        : maxNumber / randomNumber),
                 ); //calculate the score based on the bid amount and the range of possible numbers
                 chips += bidAmount; //increase chips by the bid amount if the guess is correct
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`);
@@ -107,4 +150,4 @@ function playRound(randomNumber) {
 }
 
 // Initialize the game
-startGame(); //call the startGame function to begin the game
+initializeGame(); //collect the game settings before starting the game
