@@ -123,9 +123,9 @@ function playRound(randomNumber) {
                 //if the user's guess is correct
                 score += Math.round(
                     bidAmount *
-                    (isHigher
-                        ? maxNumber / (maxNumber + 1 - randomNumber)
-                        : maxNumber / randomNumber),
+                        (isHigher
+                            ? maxNumber / (maxNumber + 1 - randomNumber)
+                            : maxNumber / randomNumber),
                 ); //calculate the score based on the bid amount and the range of possible numbers
                 chips += bidAmount; //increase chips by the bid amount if the guess is correct
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`);
