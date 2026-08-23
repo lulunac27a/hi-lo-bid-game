@@ -12,44 +12,50 @@ let maxNumber,
     currentAttempt = 1; //variables to store the maximum number, chips, total attempts, and current attempt
 
 function getPositiveInteger(value, defaultValue, settingName) {
-    const parsedValue = Number.parseInt(value, 10);
+    //function to validate and return a positive integer or default value
+    const parsedValue = Number.parseInt(value, 10); //parse the input value to an integer
 
     if (Number.isInteger(parsedValue) && parsedValue > 0) {
-        return parsedValue;
+        //check if the parsed value is a positive integer
+        return parsedValue; //return the parsed value if valid
     }
 
-    console.log(`Invalid ${settingName}. Using default of ${defaultValue}.`);
-    return defaultValue;
+    console.log(`Invalid ${settingName}. Using default of ${defaultValue}.`); //display a message indicating that the default value will be used
+    return defaultValue; //return the default value if the input is invalid
 }
 
 function initializeGame() {
+    //function to initialize the game settings
     rl.question(
         "Enter the maximum number (default 100): ",
         (inputMaxNumber) => {
+            //prompt the user to enter the maximum number
             maxNumber = getPositiveInteger(
                 inputMaxNumber,
                 100,
                 "maximum number",
-            );
+            ); //validate and set the maximum number
 
             rl.question(
                 "Enter the starting chips (default 100): ",
                 (inputChips) => {
+                    //prompt the user to enter the starting chips
                     chips = getPositiveInteger(
                         inputChips,
                         100,
                         "starting chips",
-                    );
+                    ); //validate and set the starting chips
 
                     rl.question(
                         "Enter the total attempts (default 10): ",
                         (inputTotalAttempts) => {
+                            //prompt the user to enter the total attempts
                             totalAttempts = getPositiveInteger(
                                 inputTotalAttempts,
                                 10,
                                 "total attempts",
-                            );
-                            startGame();
+                            ); //validate and set the total attempts
+                            startGame(); //start the game after collecting all settings
                         },
                     );
                 },
@@ -123,9 +129,9 @@ function playRound(randomNumber) {
                 //if the user's guess is correct
                 score += Math.round(
                     bidAmount *
-                        (isHigher
-                            ? maxNumber / (maxNumber + 1 - randomNumber)
-                            : maxNumber / randomNumber),
+                    (isHigher
+                        ? maxNumber / (maxNumber + 1 - randomNumber)
+                        : maxNumber / randomNumber),
                 ); //calculate the score based on the bid amount and the range of possible numbers
                 chips += bidAmount; //increase chips by the bid amount if the guess is correct
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`);
