@@ -73,7 +73,7 @@ function getRandomNumber() {
 function startGame() {
     //function to start the game
     const currentNumber = getRandomNumber(); //generate the initial random number
-    console.log(`\nThe initial number is: ${currentNumber}`);
+    console.log(`\nThe initial number is: ${currentNumber}`); //initial number
     playRound(currentNumber); //start the first round with the initial number
 }
 
@@ -84,7 +84,7 @@ function playRound(randomNumber) {
         //check if the current attempt exceeds total attempts
         console.log(
             `\nGame Over! You completed all attempts. Final score: ${score}`,
-        );
+        ); //game over, all attempts made
         rl.close(); //close the readline interface
         return; //return to exit the function
     }
@@ -129,21 +129,21 @@ function playRound(randomNumber) {
                 //if the user's guess is correct
                 score += Math.round(
                     bidAmount *
-                        (isHigher
-                            ? maxNumber / (maxNumber + 1 - randomNumber)
-                            : maxNumber / randomNumber),
+                    (isHigher
+                        ? maxNumber / (maxNumber + 1 - randomNumber)
+                        : maxNumber / randomNumber),
                 ); //calculate the score based on the bid amount and the range of possible numbers
                 chips += bidAmount; //increase chips by the bid amount if the guess is correct
-                console.log(`Correct! Score: ${score}. Chips: ${chips}`);
+                console.log(`Correct! Score: ${score}. Chips: ${chips}`); //correct answer
             } else {
                 chips -= bidAmount; //decrease chips by the bid amount if the guess is incorrect
-                console.log(`Wrong! Score: ${score}. Chips: ${chips}`);
+                console.log(`Wrong! Score: ${score}. Chips: ${chips}`); //wrong answer
             }
 
             // Check if user ran out of chips
             if (chips <= 0) {
                 //check if the user has run out of chips
-                console.log("\nYou ran out of chips! Game Over.");
+                console.log("\nYou ran out of chips! Game Over."); //game over, no chips left
                 rl.close(); //close the readline interface
                 return; //return to exit the function
             }
