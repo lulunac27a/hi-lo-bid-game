@@ -118,7 +118,10 @@ function playRound(randomNumber) {
                 return playRound(randomNumber); // Retry this round
             }
 
-            const nextNumber = getRandomNumber(); //generate the next random number
+            let nextNumber;
+            do {
+                nextNumber = getRandomNumber(); //generate the next random number
+            } while (nextNumber === randomNumber); //repeat until next number is different from current random number
             console.log(`The next number is: ${nextNumber}`);
 
             // Evaluate win/loss
@@ -129,9 +132,9 @@ function playRound(randomNumber) {
                 //if the user's guess is correct
                 score += Math.round(
                     bidAmount *
-                        (isHigher
-                            ? maxNumber / (maxNumber + 1 - randomNumber)
-                            : maxNumber / randomNumber),
+                    (isHigher
+                        ? maxNumber / (maxNumber + 1 - randomNumber)
+                        : maxNumber / randomNumber),
                 ); //calculate the score based on the bid amount and the range of possible numbers
                 chips += bidAmount; //increase chips by the bid amount if the guess is correct
                 console.log(`Correct! Score: ${score}. Chips: ${chips}`); //correct answer
